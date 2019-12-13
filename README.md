@@ -14,7 +14,7 @@ Role Variables
 | `linux_ad_debug_level: ""`               | Default SSSD log level                                                                                                |
 | `linux_ad_resolv_domain: ""`             | Name of the AD realm                                                                                                  |
 | `linux_ad_resolv_nameservers: []`        | List of Active Directory Domain Services (AD DS)                                                                      |
-| `linux_ad_resolv_options: []`            | Options allows certain internal resolver variables to be modified                                                     |
+| `linux_ad_resolv_options: []`            | Option allows certain internal resolver variables to be modified                                                     |
 | `linux_ad_resolv_search: []`             | Search list for host-name lookup                                                                                      |
 | `linux_ad_resolv_sortlist: []`           | Allows addresses returned by gethostbyname to be sorted                                                               |
 | `linux_ad_computer_ou: ""`               | The distinguished name of an organizational unit to create the computer account. <br> The exact format of the distinguished name depends on the client software and membership software. <br> You can usually omit the root DSE portion of distinguished name. This is an Active Directory specific option. <br> This can be the full DN or an RDN, relative to the root entry. The subtree must already exist.                        |
