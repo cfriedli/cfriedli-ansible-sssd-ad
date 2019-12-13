@@ -1,0 +1,27 @@
+# {{ ansible_managed }}
+[sssd]
+debug_level = {{ linux_ad_debug_level }}
+config_file_version = 2
+domains = {{ linux_ad_realm | lower }}
+services = nss, pam, pac
+default_domain_suffix = {{ linux_ad_realm | lower }}
+
+[domain/{{ linux_ad_realm | lower }}]
+ad_domain = {{ linux_ad_realm | lower }}
+ad_site = {{ linux_ad_site | upper }}
+
+krb5_realm = {{ linux_ad_realm | upper }}
+realmd_tags = manages-system joined-with-samba
+cache_credentials = false
+krb5_store_password_if_offline = false
+id_provider = ad
+auth_provider = ad
+access_provider = simple
+simple_allow_groups = {{ linux_ad_access_groups |join(", ") }}
+ldap_id_mapping = true
+default_shell = /bin/bash
+fallback_homedir = /home/%u@%d
+override_homedir = /home/%u
+use_fully_qualified_names = true
+debug_level = 2
+min_id = 1000

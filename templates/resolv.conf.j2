@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+
+{% if linux_ad_resolv_search | length > 0 %}
+search {{ linux_ad_resolv_search|join(' ') }}
+{% endif %}
+{% if linux_ad_resolv_domain != "" %}
+domain {{ linux_ad_resolv_domain }}
+{% endif %}
+{% for ns in linux_ad_resolv_nameservers %}
+nameserver {{ ns }}
+{% endfor %}
+{% if linux_ad_resolv_sortlist | length > 0 %}
+{% for sl in linux_ad_resolv_sortlist %}
+sortlist {{ sl }}
+{% endfor %}
+{% endif %}
+{% if linux_ad_resolv_options | length > 0 %}
+options {{ linux_ad_resolv_options|join(' ') }}
+{% endif %}

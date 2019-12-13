@@ -1,0 +1,92 @@
+---
+- name: CentOS 7 - Install all prerequesite packages
+  yum:
+    name: "{{ linux_ad_centos7_packages }}"
+    state: present
+  debugger: on_failed
+
+- name: Check if Domain is reachable
+  shell: adcli info campus.unibe.ch | grep "domain-forest = {{ linux_ad_realm }}"
+  changed_when: false
+  ignore_errors: false
+
+- name: Check if machine is bound
+  command: getent group {{ linux_ad_testgroup }}
+  register: ad_bound
+  changed_when: false
+  ignore_errors: true
+
+- name: Stopping sssd service
+  systemd:
+    name: sssd
+    state: stopped
+  when: ad_bound is failed
+
+- name: Start sssd-kcm service
+  systemd:
+    name: sssd-kcm
+    state: started
+    enabled: yes
+
+- name: Insert a new rule pam_wheel.so with argument ' trust {{ linux_ad_accessgroups }} 'after an existing rule pam_rootok.so
+  pamd:
+    name: su
+    type: auth
+    control: sufficient
+    module_path: pam_rootok.so
+    new_type: auth
+    new_control: required
+    new_module_path: pam_wheel.so
+    module_arguments: ' trust group={{ linux_ad_accessgroups }}'
+    state: after
+
+- name: Template the krb5.conf configuration file to /etc/krb5.conf
+  template:
+    src: templates/krb5.conf.j2
+    dest: /etc/krb5.conf
+    owner: root
+    group: root
+    setype: krb5_conf_t
+    mode: '0644'
+
+- name: "Configure resolv.conf"
+  template:
+    src: templates/resolv.conf.j2
+    dest: /etc/resolv.conf
+    setype: net_conf_t
+    mode: "0644"
+  ignore_errors: true
+
+- name: Add two IPv4 DNS server addresses to NetworkManager
+  nmcli:
+    conn_name: ens192
+    type: ethernet
+    dns4: '{{ linux_ad_resolv_nameservers }}'
+    state: present
+  when: ad_bound is failed
+
+- name: Join system in to the provided OU
+  shell: echo '{{ linux_ad_bind_password }}' | realm join -U {{ linux_ad_join_admin }}@{{ linux_ad_realm | upper }} --membership-software=adcli --computer-ou={{ linux_ad_computer_ou |join(",") }}  {{ linux_ad_realm }}
+  no_log: true
+  notify: restart sssd
+  debugger: on_failed
+  when: ad_bound is failed
+
+- name: Template the sssd configuration file to /etc/sssd/sssd.conf
+  template:
+    src: templates/sssd.conf.j2
+    dest: /etc/sssd/sssd.conf
+    owner: root
+    group: root
+    setype: sssd_conf_t
+    mode: '0600'
+  notify: restart sssd
+  ignore_errors: true
+
+- name: Template the sudo configuration for all administrators
+  template:
+    src: 01_admins.j2
+    dest: /etc/sudoers.d/01_admins
+    validate: 'visudo -cf %s'
+    setype: etc_t
+    mode: 0440

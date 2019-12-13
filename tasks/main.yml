@@ -1,0 +1,7 @@
+---
+#Include variables and diefine needed verables
+- name: Variable configuration
+  include_vars: variables.yml
+
+- name: Install tasks
+  include_tasks: setup-{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml

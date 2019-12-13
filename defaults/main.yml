@@ -1,0 +1,57 @@
+---
+# defaults file for sssd
+# SSSD log level 
+linux_ad_debug_level:
+# Name of the AD realm
+linux_ad_realm: ""
+# Access Groups
+linux_ad_accessgroups: []
+# A list of Active Directory Domain Services (AD DS)
+linux_ad_resolv_nameservers: []
+# The AD Domain
+linux_ad_resolv_domain: ""
+# Search list for host-name lookup. 
+linux_ad_resolv_search: []
+# Allows addresses returned by gethostbyname to be sorted
+linux_ad_resolv_sortlist: []
+# Options allows certain internal resolver variables to be modified.
+linux_ad_resolv_options: []
+# The distinguished name of an organizational unit to rate the computer account.
+# The exact format of the disinguished name depends on the client software and membership software.
+# You can usually omit the root DSE portion on desinguished name. This is an Active Directory specicfic option.
+# This can be the Full DB or an RDN, reltive to the root entry. The subtree must already exist.
+linux_ad_computer_ou: []
+# Name of the Active Directory site
+linux_ad_site: ""
+# Group used do test the Active Directory membership
+linux_ad_testgroup: ""
+# The user name to be used to authenticate with when joining the machine to the realm.
+linux_ad_user: ""
+# Password for the linux_ad_user
+linux_ad_bind_password: ""
+
+# List of prerequisite packages on CentOS 7
+linux_ad_centos7_packages:
+  - oddjob
+  - oddjob-mkhomedir
+  - sssd
+  - adcli
+  - samba-common-tools
+  - sssd-ad
+  - samba-common
+  - NetworkManager-glib
+
+# List of prerequisite packages on CentOS 8
+linux_ad_centos8_packages:
+  - bind-utils
+  - PackageKit
+  - adcli
+  - python3-libselinux
+  - realmd
+  - oddjob
+  - oddjob-mkhomedir
+  - sssd
+  - adcli
+  - samba-common-tools
+  - sssd-ad
+  - samba-common

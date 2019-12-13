@@ -1,0 +1,6 @@
+---
+# handlers file for sssd
+- name: restart sssd
+  systemd:
+    state: restarted
+    name: sssd
