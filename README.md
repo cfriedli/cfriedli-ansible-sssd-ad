@@ -11,7 +11,7 @@ Role Variables
 
 | Variable Name                            | Description                                                                                                           |
 | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------|
-| `linux_ad_debug_level: ""`               | Refault SSSD log level                                                                                                |
+| `linux_ad_debug_level: ""`               | Default SSSD log level                                                                                                |
 | `linux_ad_resolv_domain: ""`             | Name of the AD realm                                                                                                  |
 | `linux_ad_resolv_nameservers: []`        | List of Active Directory Domain Services (AD DS)                                                                      |
 | `linux_ad_resolv_options: []`            | Options allows certain internal resolver variables to be modified                                                     |
