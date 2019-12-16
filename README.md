@@ -56,11 +56,6 @@ Inside vars/main.yml:
       linux_ad_resolv_options:
             - "timeout:2"
 
-License
--------
-
-[GPLv3](https://tldrlegal.com/license/gnu-general-public-license-v3-%28gpl-3%29)
-
 
 Author Information
 ------------------
