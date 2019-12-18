@@ -6,8 +6,11 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: bootstrap-centos-7
-    image: centos:7
+        #  - name: bootstrap-centos-7
+        #    image: centos:7
+  - name: bootstrap-ubuntu-18.04
+    image: ubuntu:18.04
+
 provisioner:
   name: ansible
   lint:
