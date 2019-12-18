@@ -26,7 +26,7 @@
   systemd:
     name: sssd-kcm
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Insert a new rule pam_wheel.so with argument ' trust {{ linux_ad_accessgroups }} 'after an existing rule pam_rootok.so
   pamd:
