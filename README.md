@@ -36,6 +36,7 @@ Example Playbook
       - { role: cfriedli.sssd-ad }
   
 Inside vars/main.yml:
+
       linux_ad_join_admin: !vault |                                                                                          
                 $ANSIBLE_VAULT;1.1;AES256                                                                                    
                 30316461356631636161663264326262386463313430613154543545432542432424366536646462                             
