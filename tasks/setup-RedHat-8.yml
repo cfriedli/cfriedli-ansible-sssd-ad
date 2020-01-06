@@ -58,13 +58,13 @@
     mode: "0644"
   ignore_errors: true
 
-- name: Add two IPv4 DNS server addresses to NetworkManager
-  nmcli:
-    conn_name: ens192
-    type: ethernet
-    dns4: '{{ linux_ad_resolv_nameservers }}'
-    state: present
-  when: ad_bound is failed
+#- name: Add two IPv4 DNS server addresses to NetworkManager
+#  nmcli:
+#    conn_name: ens192
+#    type: ethernet
+#    dns4: '{{ linux_ad_resolv_nameservers }}'
+#    state: present
+#  when: ad_bound is failed
 
 - name: Join system in to the provided OU
   shell: echo '{{ linux_ad_bind_password }}' | realm join -U {{ linux_ad_join_admin }}@{{ linux_ad_realm | upper }} --membership-software=adcli --computer-ou={{ linux_ad_computer_ou |join(",") }}  {{ linux_ad_realm }}
