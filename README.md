@@ -1,6 +1,6 @@
 # Ansible Role: cfriedli-sssd-ad (for Active Directory)
 
-An ansible role that installs SSSD (for Active Direcotry) on EL 7 and EL 8.
+An ansible role that installs SSSD (for Active Directory) on EL 7 and EL 8.
 
 Requirements
 --------------
@@ -69,11 +69,6 @@ Inside vars/main.yml:
               - "{{ linux_ad_realm }}"
       linux_ad_resolv_options:
             - "timeout:2"
-
-License
--------
-
-[GPLv3](https://tldrlegal.com/license/gnu-general-public-license-v3-%28gpl-3%29)
 
 
 Author Information
