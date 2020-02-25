@@ -31,7 +31,8 @@ Example Playbook
 ----------------
 
      - hosts: all
-       vars_fall vars/main.yml
+       vars_files 
+         - vars/main.yml
        roles:
       - { role: cfriedli.sssd-ad }
   
