@@ -75,5 +75,5 @@ Inside vars/main.yml:
 Author Information
 ------------------
 
-The `cfriedli.sssd-ad` role was written by Christian Friedli | [e-mail](mailto:christian.friedli@id.unibe.ch) | [GitHub](https://github.com/cfriedli)
+The `cfriedli.sssd-ad` role was written by Christian Friedli | [e-mail](mailto:christian@cloudmonk.ch) | [GitHub](https://github.com/cfriedli)
 
